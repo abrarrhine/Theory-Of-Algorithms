@@ -1,0 +1,235 @@
+\documentclass[11pt]{article}
+\usepackage {tikz}
+\usetikzlibrary {positioning}
+%\usepackage {xcolor}
+\definecolor {processblue}{cmyk}{0.96,0,0,0}
+\usepackage{latexsym}
+\usepackage{amsfonts}
+\usepackage[noend]{algpseudocode}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt plus 1pt}
+\setlength{\headheight}{13.6pt}
+\newcommand\question[2]{\vspace{.25in}\hrule\textbf{#1: #2}\vspace{.5em}\hrule\vspace{.10in}}
+\renewcommand\part[1]{\vspace{.10in}\textbf{(#1)}}
+\newcommand\www{\vspace{.10in}\textbf{Algorithm: }}
+\newcommand\correctness{\vspace{.10in}\textbf{Correctness: }}
+\newcommand\runtime{\vspace{.10in}\textbf{Running time: }}
+\pagestyle{fancyplain}
+\lhead{\textbf{\NAME}}
+%\lhead{\textbf{\NAME\ (\ID)}}
+\chead{\textbf{Midterm\HWNUM}}
+\rhead{CS 5114 (Fall 2021)}
+%\begin{document}\raggedright
+\begin{document}
+
+%Section A==============Change the values below to match your information==================
+\newcommand\NAME{Abrar Islam}  % your name
+\newcommand\ID{abrarr18}     % your VT PID Account
+\newcommand\HWNUM{}              % the homework number
+%Section B==============Put your answers to the questions below here=======================% no need to restate the problem --- the graders know which problem is which,% but replacing "The First Problem" with a short phrase will help you remember% which problem this is when you read over your homeworks to study.
+\question{1}{The First Problem}
+\part{a} \textbf{True}. 
+\newline 
+We know that, $n^2$ is polynomial and $2^n$ is exponential function. The growth of exponential function is higher than the growth of polynomial function. This means exponential growth algorithm will take more time on smaller change in input size than polynomial growth algorithm. So, a \Theta$(n^2)$ algorithm runs faster than a \Theta$(2^n)$ algorithm for any input instance.
+\newline
+\newline 
+\part{b} \textbf{True}
+\newline 
+In every stable matching S for this instance, the pair (h, s) belongs to S. Because if some other student s2 chose h as its first choice then h would like to go with s as it is h's first choice. Also, if some hospital h2 preferred s as its first choice then s would like to go with h as it is s's first choice. Therefore, the pair (h, s) always belongs to S.
+\newline
+\newline 
+\part{c} \textbf{True}
+\newline
+This would be same as the greedy rule we discussed in class. With the greedy algorithm discussed in class, we chose earliest finishing time first and deleted all requests that are not compatible with that interval and keep doing it until the array is empty. So, if we choose latest-start-time-first algorithm, then we will be choosing the interval that has latest start time first, delete all the intervals that is not compatible with our chosen interval and keep doing it until the array is empty. In both ways we can maximize the time left to satisfy other requests and maximize the number of requests accepted. So, that's why I think that the latest-start-time-first algorithm is optimal for the above problem. 
+\newline 
+\newline
+\part{d} \textbf{True}
+\newline We know that, every n-node tree has exactly n − 1 edges. Considering a forest graph consisting of k trees with a total of n nodes, the number of edges in graph G would be n-k. So, Graph G has n-k edges. 
+\newline 
+\newline 
+\part{e} \textbf{False}
+\newline Here T is a minimum spanning tree of a graph G. A minimum spanning tree is a subset of the edges of a connected, edge-weighted undirected graph that connects all the vertices together, without any cycles and with the minimum possible total edge weight. Consider a graph G (shown below) with vertices with A, B, C and edges (AB,3), (BC,5) and (AC,6). Here MST will consider edge AB and BC. So, the shortest path from A to C in graph G would be AC (weight: 6) where the shortest path in T would be AB + BC (weight: 8). This is the counter-example that proves the claim false.
+
+\begin {center}
+\begin{tikzpicture}[auto, node distance=3cm, every loop/.style={},
+                    thick,main node/.style={circle,draw,font=\sffamily\Large\bfseries}]
+\node[main node] (C) {$c$};
+\node[main node] (A) [above left=of C] {$A$};
+\node[main node] (B) [above right =of C] {$B$};
+\path (A) edge [straight right = -15] node[below =0.15 cm] {$6$} (C);
+\path (A) edge [straight right = -15] node[below =0.15 cm] {$3$} (B);
+\path (C) edge [straight left =15] node[below =0.15 cm] {$5$} (B);
+\end{tikzpicture}
+\end{center}
+
+\question{2}{The Second Problem}
+\part{a} $T(n) = 9T(n/3)+n^3$ 
+\newline Comparing it with $T(n) = a T(n/b)+ f(n)$, we get:  a = 9; b = 3; f(n) = $n^3$.
+\newline Now, \log_{b}a = \log_{3}9 = 2. 
+\newline and $ f(n) = n^3 => f(n) =$ \Theta $(n^3)$. 
+\newline $=> f(n) =$ \Theta $(n^3)$ = \Theta $(n^2 * n)$ = \Theta $(n^\log_{3}9 + 1$)
+\newline $=> f(n) =$ \Theta $(n^\log_{b}a + \varepsilon $). 
+\newline Now check for: $a f(n/b) \le c f(n)$ 
+\newline $=>$ $ 9 * n^3 /8 \le c (n^3)$ $=>$ $c \ge 9/8$
+\newline So, $a f(n/b) \le c f(n)$ is true. 
+\newline 
+\newline From these, we can conclude that: $T(n)= \Theta (f(n)) => T(n) = \Theta (n^3)$
+
+\newline
+\newline 
+\part{b} $T(n) = 2T(n/2)+n$
+\newline Comparing it with $T(n) = a T(n/b)+ f(n)$, we get:  a = 2; b = 2; f(n) = $n$.
+\newline  Now, 
+\newline \log_{b}a = \log_{2}2 = 1. 
+\newline As f(n) = n, f(n) = \Theta (n).
+\newline =>$ f(n) = \Theta (n^1) = \Theta (n^\log_{2}2$) = $\Theta (n^\log_{b}a$)
+\newline So, T(n) = $\Theta (n^\log_{b}a$ $*$ logn)
+\newline Therefore, T(n) = $\Theta$(n $logn)$
+
+\newline
+\newline 
+\part{c} $T(n) = 5T(n/2)+n^2$
+\newline Comparing it with $T(n) = a T(n/b)+ f(n)$, we get:  a = 5; b = 2; f(n) = $n^2$.
+\newline 
+\newine Now, \log_{b}a = \log_{2}5 = 2.32
+\newline As $f(n) = n^2, f(n) = \Theta (n^2)$
+\newine $=> f(n) = \Theta (n^{2.32 - 0.32}) = \Theta (n^{\log_{2}5 - 0.32}$)
+\newline $=> f(n) = \Theta (n^{\log_{a}b - \varepsilon}$) where \varepsilon > 0. 
+\newline 
+\newline $From this we can conclude that, T(n) = \Theta (f(n))$. 
+\newline So, T(n) = $\Theta (n^{\log_{a}b}$)
+\newline Therefore, T(n) = $\Theta (n^{\log_{2}5}$). 
+\newline 
+\newline
+\part{d} $T(n) = 4T(n/4)+n(logn)^5$
+\newline Comparing it with $T(n) = a T(n/b)+ n^k (log n)^p$, we get:  a = 4; b = 4; p = 5 and k = 1 .
+\newline Now, $b^k = 4^1 = 4 => a = b^k$
+\newline Here, $p = 5 > -1$
+\newline $=>$ T(n) = \Theta $(n^\log_{b}a$ $(log n)^{p+1}$)
+\newline $=>$ T(n) = \Theta $(n^\log_{4}4$ $(log n)^{5+1}$)
+\newline $=>$ T(n) = \Theta $(n(log n)^6$)
+\newline
+\newline 
+\part{e} $T(n) = T(n-1)+2n$
+\newline Replacing n by n-1 yields: T(n-1) = T(n-2) + 2(n-1).
+\newline So, T(n) = T(n-2) + 2(n-1) + 2n. 
+\newline Again, replacing n by n-2 in the given equation yields: T(n-2) = T(n-3) + 2(n-2)
+\newline So, T(n) = T(n-3) + 2(n-2) + 2(n-1) + 2n
+\newline $=> T(n) = T(n-3) + 2(n-3)$
+\newline 
+\newline So, in general, T(n) = T(n-i) + 2(n-i). 
+\newline As i increases, i = n and T(0) = 1. 
+\newline So, T(n) = T(0) + 2(0) = 1 + 0 = 1
+\newline Therefore, T(n) = \Theta (1)
+
+\question{3}{The Third Problem}
+\newline \textbf{Divide-Conquer Algorithm: }
+\newline Procedure getMojorityElement(A[1...n])
+\newline Input: Array A of objects (size n)
+\newline Output: Majority element of Array A
+\newline if A has only one element, then return the element
+\newline Let an integer k be $n/2$
+\newline $elem_l$ = getMajorityElement(A[1...k])
+\newline $elem_r$ = getMajorityElement(A[k+1...n])
+\newline if $elem_l$ == $elem_r$ then return $elem_l$
+\newline lcount = getFrequency(A[1...n], $elem_l$)
+\newline rcount = getFrequency(A[1...n], $elem_r$)
+\newline if lcount $>$ k+1 then return $elem_l$ 
+\newline else if rcount $>$ k+1 then return $elem_r$
+\newline else return NO-MAJORITY-ELEMENT
+\newline 
+\newline getFrequency() computes the number of times an element appears in the given array.
+\newline
+\newline
+\correctness{} 
+\newline Through this algorithm, I split the array A into 2 sub-arrays of half the size. I choose the majority element of both sub-arrays. After that I do a linear time equality operation to decide whether it is possible to find a majority
+element. We choose both the majority element of both subarrays and calculate how many times they apprear in array A[1...n]. Then I return the element that appears more than half of the entries of the array if there's any otherwise I return NO-MAJORITY-ELEMENT. This proves the correctness of this divide and conquer algorithm.
+\newline
+\newline
+\runtime{} The recurrence relation of this algorithm is:  $T(n) = 2T(n/2) + O(n)$. 
+\newline So, the running time complexity of this algorithm comes to $O(n$ log$n)$. 
+
+\question{4}{The Fourth Problem}
+\newline A greedy algorithm that would solve the problem in
+  polynomial time would choose jobs with the longest finishing time first,
+  disregarding the pre-processing times. In order to accomplish this, we
+  can simply sort the jobs in descending order using quick sort algorithm, and feed
+  the jobs into the system with the sorted order.
+  \newline 
+\newline \textbf{Polynomial-Time Greedy Algorithm: }
+\newline \textbf{Input: } An array A of jobs \{$J_1, J_2,...., J_n$\}
+\newline Sort the array A in descending order using quick sort based on their finishing time $f_i$ on a PC.
+\newline
+\newline For each job in Array A:
+\newline -\quad Feed the job to the super-computer
+\newline -\quad Wait for the job to finish pre-processing
+\newline -\quad Send the job to a PC after pre-processing to finish
+\newline End loop
+\newline
+\newline \correctness{}
+Here I sort the given array A in descending order using quick sort based on their finishing time $f_i$ on a PC. This allows the job with longest finishing time to move to PC after pre-processing. The other jobs come in order and moves on to available PCs. This algorithm is correct because it makes sure to complete all the jobs using minimum amount of time. This job scheduling order minimizes the completion time because as the jobs with longer finishing time are being pre-processed first, it minimizes the total completion time. This is a greedy algorithm because it selects the longest finishing time job first. This algorithm is easily seen to be a polynomial time algorithm. It uses quick sort,
+which is a $O$(n $logn)$ sorting algorithm. After the sorting, we can feed each of the $n$ jobs into the supercompmputer and then into a PC (2 operations for each job).
+\newline 
+\newline \runtime{}  The running time complexity for quick sort and for loop is respectively $O$(n $logn)$ and $O(n)$. So, The running time complexity of this algorithm will be $O(n)$ + $O$(n $logn)$ which is $O$(n $logn)$. 
+
+
+\question{5}{The Fifth Problem}
+From the given statements, we cannot conclude that T itself must be a minimum spanning tree in G. The counter-example proving the assumption to be false is: 
+\newline 
+\newline Consider a simple graph G with three vertices A, B, C with three edges as in the picture below. 
+\begin {center}
+\begin{tikzpicture}[auto, node distance=3cm, every loop/.style={},
+                    thick,main node/.style={circle,draw,font=\sffamily\Large\bfseries}]
+\node[main node] (C) {$c$};
+\node[main node] (A) [above left=of C] {$A$};
+\node[main node] (B) [above right =of C] {$B$};
+\path (A) edge [straight right = -15] node[below =0.15 cm] {$2$} (C);
+\path (A) edge [straight left =25] node[above] {$1$} (B);
+\path (C) edge [straight left =15] node[below =0.15 cm] {$2$} (B);
+\end{tikzpicture}
+\end{center}
+\newline Two possible minimum spanning trees of given graph are: 
+\newline
+\begin {center}
+\begin{tikzpicture}[auto, node distance=3cm, every loop/.style={},
+                    thick,main node/.style={circle,draw,font=\sffamily\Large\bfseries}]
+\node[main node] (C) {$c$};
+\node[main node] (A) [above left=of C] {$A$};
+\node[main node] (B) [above right =of C] {$B$};
+\path (A) edge [straight right = -15] node[below =0.15 cm] {$2$} (C);
+\path (A) edge [straight left =25] node[above] {$1$} (B);
+
+\end{tikzpicture}
+\end{center}
+
+\begin {center}
+\begin{tikzpicture}[auto, node distance=3cm, every loop/.style={},
+                    thick,main node/.style={circle,draw,font=\sffamily\Large\bfseries}]
+\node[main node] (C) {$c$};
+\node[main node] (A) [above left=of C] {$A$};
+\node[main node] (B) [above right =of C] {$B$};
+\path (A) edge [straight left =25] node[above] {$1$} (B);
+\path (C) edge [straight left =15] node[below =0.15 cm] {$2$} (B);
+\end{tikzpicture}
+\end{center}
+\newline Let's label the top minimum spanning tree as MST1 and the bottom minimum spanning tree as MST2. Now let's build a minimum spanning tree given below where edge AC is taken from MST1 and edge BC is taken from MST2. The newly formed spanning tree is: 
+
+\begin {center}
+\begin{tikzpicture}[auto, node distance=3cm, every loop/.style={},
+                    thick,main node/.style={circle,draw,font=\sffamily\Large\bfseries}]
+\node[main node] (C) {$c$};
+\node[main node] (A) [above left=of C] {$A$};
+\node[main node] (B) [above right =of C] {$B$};
+\path (A) edge [straight right = -15] node[below =0.15 cm] {$2$} (C);
+\path (C) edge [straight left =15] node[below =0.15 cm] {$2$} (B);
+\end{tikzpicture}
+\end{center}
+\newline The new spanning tree is formed with all edge e from either MST1 or MST2. But the tree itself isn't minimum spanning tree because its total cost is 4 rather than 3. So, this counter-example proves the given statement false. 
+\newline 
+\newline Therefore, we cannot conclude that T itself must be a minimum spanning tree in G. 
+
+\end{document}
